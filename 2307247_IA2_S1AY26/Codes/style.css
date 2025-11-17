@@ -1,0 +1,135 @@
+/* ===========================
+   STYLE.CSS — 876Kickz
+   by Alex Crawford | 2307247
+   =========================== */
+
+/* Color Palette */
+:root {
+  --primary: #0b5bd6;
+  --accent: #36d67a;
+  --accent2: #6a4bd6;
+  --bg: #f7f9fc;
+  --text: #111827;
+  --muted: #6b7280;
+  --radius: 8px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* HEADER */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: #ffffffe8;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+.logo { width: 55px; }
+
+.site-header nav a {
+  margin-left: 14px;
+  text-decoration: none;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  color: #ffffffea;
+  padding: 24px;
+  border-radius: var(--radius);
+  margin-bottom: 22px;
+}
+
+/* PRODUCT GRID */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.product-card {
+  background: #fff;
+  padding: 14px;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: var(--radius);
+  height: 160px;
+  object-fit: cover;
+}
+
+.price {
+  font-weight: bold;
+  color: var(--accent2);
+}
+
+/* PRODUCT DETAIL */
+.product-detail-card {
+  background: #fff;
+  padding: 18px;
+  border-radius: var(--radius);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+  max-width: 480px;
+  margin: auto;
+  text-align: center;
+}
+
+.product-detail-img {
+  width: 100%;
+  max-height: 360px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  margin-bottom: 16px;
+}
+
+/* BUTTONS */
+.btn {
+  padding: 10px 14px;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  background: #e5e7eb;
+  margin: 3px 0;
+}
+
+.btn.primary {
+  background: var(--primary);
+  color: #b3c5b3;
+}
+
+/* CART */
+.cart-line {
+  display: flex;
+  justify-content: space-between;
+  background: #b9cabf;
+  padding: 10px;
+  border-radius: var(--radius);
+  margin-top: 12px;
+}
+
+/* FOOTER */
+.site-footer {
+  text-align: center;
+  margin-top: 25px;
+  color: var(--muted);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+  .logo { width: 45px; }
+  .products-grid { grid-template-columns: 1fr; }
+}

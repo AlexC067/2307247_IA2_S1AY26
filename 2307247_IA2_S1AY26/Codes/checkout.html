@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - 876Kickz</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+<header class="site-header small">
+  <div class="brand">
+    <img src="../Assets/logo.png" class="logo">
+    <h1>876Kickz</h1>
+  </div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+</header>
+
+<main class="container narrow">
+  <h2>Order Checkout</h2>
+
+  <div id="checkout-cart-summary"></div>
+
+  <form id="checkout-form">
+    <label>Full Name</label>
+    <input id="ship-name">
+
+    <label>Address</label>
+    <input id="ship-address">
+
+    <label>Email</label>
+    <input id="ship-email">
+
+    <label>Total Amount</label>
+    <input id="amount">
+
+    <button class="btn primary">Confirm & Pay</button>
+  </form>
+</main>
+
+<script src="../script.js"></script>
+</body>
+</html>
