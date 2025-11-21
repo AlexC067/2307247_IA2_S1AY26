@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>876Kickz | Custom Sports Gear for UTech</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- IA2: external CSS and JS only -->
+  <link rel="stylesheet" href="../style.css">
+  <script src="../script.js" defer></script>
+</head>
+<body data-page="home">
+  <header class="site-header centered-header">
+  <div class="header-brand">
+    <h1 class="brand-title">876KICKZ</h1>
+    <img src="../Assets/logo.png" alt="876Kickz logo" class="main-logo">
+    <p class="brand-slogan">NEVER SETTLE FOR LESS</p>
+  </div>
+
+  <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation">☰</button>
+
+  <nav aria-label="Main navigation">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#products">Products</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+</header>
+
+  <main>
+    <!-- IA2: Hero banner (matches storyboard layout) -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-text">
+        <p class="hero-tagline">UTech • Sports • Style</p>
+        <h1 id="hero-title">Never Settle for Less with 876Kickz</h1>
+        <p>
+          Custom jerseys, athletic wear, and accessories designed for UTech
+          students, athletes, and supporters. Show your faculty pride on and off the field.
+        </p>
+        <div style="margin-top: 0.9rem;">
+          <a href="#products" class="btn secondary">Shop Jerseys &amp; Gear</a>
+          <a href="register.html" class="btn outline">Create Account</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- IA2: Product grid using CSS Grid -->
+    <section id="products" aria-label="Featured products">
+      <h2>Featured Gear</h2>
+      <p>High-quality, faculty-branded sportswear and athleisure pieces for every game and training session.</p>
+
+      <div class="product-grid">
+        <!-- Product 1 -->
+        <article class="product-card" data-product-id="p1">
+          <img src="../Assets/product1.png" alt="Blue and purple 876Kickz jersey set with shirts and socks">
+          <div class="product-card-body">
+            <h3 class="product-name">Interfaculty Jersey Set</h3>
+            <p class="product-meta">
+              Custom jersey with name &amp; number, matching socks, and colour options for your faculty.
+            </p>
+            <p class="price" data-price="55.00">$55.00</p>
+            <button class="btn add-to-cart" type="button">Add to Cart</button>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+        <article class="product-card" data-product-id="p2">
+          <img src="../Assets/product2.png" alt="876Kickz navy tracksuit set with sneakers">
+          <div class="product-card-body">
+            <h3 class="product-name">876Kickz Training Tracksuit</h3>
+            <p class="product-meta">
+              Warm-up jacket, joggers, and sneakers – perfect for training days and cool evenings on campus.
+            </p>
+            <p class="price" data-price="95.00">$95.00</p>
+            <button class="btn add-to-cart" type="button">Add to Cart</button>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+        <article class="product-card" data-product-id="p3">
+          <img src="../Assets/product3.png" alt="Navy 876Kickz women's sports bra, tights, and running shoes">
+          <div class="product-card-body">
+            <h3 class="product-name">Women’s Performance Set</h3>
+            <p class="product-meta">
+              Supportive sports bra, leggings, and runners in signature 876Kickz colours.
+            </p>
+            <p class="price" data-price="70.00">$70.00</p>
+            <button class="btn add-to-cart" type="button">Add to Cart</button>
+          </div>
+        </article>
+
+        <!-- Product 4 -->
+        <article class="product-card" data-product-id="p4">
+          <img src="../Assets/product4.jpeg" alt="Lavender athleisure set with jersey, leggings, sneakers and bottle">
+          <div class="product-card-body">
+            <h3 class="product-name">Lavender Athleisure Pack</h3>
+            <p class="product-meta">
+              Jersey, leggings, sneakers and bottle – ideal for gym sessions and casual campus wear.
+            </p>
+            <p class="price" data-price="60.00">$60.00</p>
+            <button class="btn add-to-cart" type="button">Add to Cart</button>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 876Kickz • Never Settle for Less.</p>
+  </footer>
+</body>
+</html>

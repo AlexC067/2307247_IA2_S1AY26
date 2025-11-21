@@ -2,53 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Login | 876Kickz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - 876Kickz</title>
   <link rel="stylesheet" href="../style.css">
+  <script src="../script.js" defer></script>
 </head>
-<body>
-
-<header class="site-header small">
-  <div class="brand">
-    <img src="../Assets/logo.png" class="logo">
-    <h1>876Kickz</h1>
+<body data-page="login">
+  <header class="site-header centered-header">
+  <div class="header-brand">
+    <h1 class="brand-title">876KICKZ</h1>
+    <img src="../Assets/logo.png" alt="876Kickz logo" class="main-logo">
+    <p class="brand-slogan">NEVER SETTLE FOR LESS</p>
   </div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="product-list.html">Products</a>
-    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-    <a href="login.html">Login</a>
-    <a href="register.html">Register</a>
-  </nav>
-</header>
 
-<main class="container narrow">
-    <section class="hero">
-    <h2>Premium Sportswear for Jamaican Athletes</h2>
-    <p>Custom Jerseys • Track Suits • Gym Wear • Sneakers</p>
-  </section>
+    <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation">☰</button>
 
-  <h2>Featured Products</h2>
-  <section id="products" class="products-grid"></section>
-</main>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <h2>Login</h2>
+  <main>
+    <!-- IA2: Login form with JS validation -->
+    <section class="form-card">
+      <h2>Login</h2>
+      <p>Sign in to view your past orders and track your 876Kickz cart.</p>
 
-  <form id="login-form">
-    <label>Username</label>
-    <input id="login-username" type="text">
+      <div id="loginError" class="error" aria-live="polite"></div>
 
-    <label>Password</label>
-    <input id="login-password" type="password">
+      <form id="loginForm" novalidate>
+        <div class="form-row">
+          <label for="loginUsername">Username</label>
+          <input type="text" id="loginUsername" name="username" autocomplete="username">
+        </div>
 
-    <button class="btn primary">Login</button>
-  </form>
-</main>
+        <div class="form-row">
+          <label for="loginPassword">Password</label>
+          <input type="password" id="loginPassword" name="password" autocomplete="current-password">
+        </div>
 
-<footer class="site-footer">
-  <p>&copy; 2025 876Kickz – Never Settle For Less</p>
-</footer>
+        <div class="form-actions">
+          <button class="btn" type="submit">Login</button>
+          <a class="btn secondary" href="register.html">Create Account</a>
+        </div>
+      </form>
+    </section>
+  </main>
 
-<script src="../script.js"></script>
+  <footer class="site-footer">
+    <p>&copy; 2025 876Kickz • Never Settle for Less.</p>
+  </footer>
 </body>
 </html>

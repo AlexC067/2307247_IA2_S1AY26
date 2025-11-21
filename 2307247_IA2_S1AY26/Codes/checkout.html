@@ -2,45 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Checkout | 876Kickz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout - 876Kickz</title>
   <link rel="stylesheet" href="../style.css">
+  <script src="../script.js" defer></script>
 </head>
 
 <body>
-<header class="site-header small">
-  <div class="brand">
-    <img src="../Assets/logo.png" class="logo">
-    <h1>876Kickz</h1>
-  </div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="cart.html">Cart</a>
-  </nav>
+
+<header class="site-header">
+    <h1 class="brand-title">876Kickz</h1>
+    <img src="../Assets/logo.png" alt="Logo" class="main-logo">
+    <p class="brand-slogan">Never Settle for Less</p>
+
+    <nav>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+      </ul>
+    </nav>
 </header>
 
-<main class="container narrow">
-  <h2>Order Checkout</h2>
+<main>
+  <h2>Checkout</h2>
 
-  <div id="checkout-cart-summary"></div>
+  <div class="form-card">
+      <form id="checkoutForm" onsubmit="handleCheckoutSubmit(event)">
 
-  <form id="checkout-form">
-    <label>Full Name</label>
-    <input id="ship-name">
+          <div class="form-row">
+              <label for="shipName">Full Name</label>
+              <input type="text" id="shipName" required>
+          </div>
 
-    <label>Address</label>
-    <input id="ship-address">
+          <div class="form-row">
+              <label for="shipAddress">Shipping Address</label>
+              <input type="text" id="shipAddress" required>
+          </div>
 
-    <label>Email</label>
-    <input id="ship-email">
+          <div class="form-row">
+              <label for="amountPaid">Amount Being Paid (USD)</label>
+              <input type="number" id="amountPaid" step="0.01" required>
+          </div>
 
-    <label>Total Amount</label>
-    <input id="amount">
+          <p id="checkoutError" class="error"></p>
 
-    <button class="btn primary">Confirm & Pay</button>
-  </form>
+          <div class="form-actions">
+              <button class="btn" type="submit">Confirm Order</button>
+              <a href="cart.html" class="btn secondary">Cancel</a>
+          </div>
+
+      </form>
+  </div>
 </main>
 
-<script src="../script.js"></script>
+<footer class="site-footer">
+  <p>&copy; 2025 876Kickz • Never Settle for Less</p>
+</footer>
+
 </body>
 </html>

@@ -2,46 +2,81 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <title>Register | 876Kickz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register - 876Kickz</title>
   <link rel="stylesheet" href="../style.css">
+  <script src="../script.js" defer></script>
 </head>
-
-<body>
-<header class="site-header small">
-  <div class="brand">
-    <img src="../Assets/logo.png" class="logo">
-    <h1>876Kickz</h1>
+<body data-page="register">
+  <header class="site-header centered-header">
+  <div class="header-brand">
+    <h1 class="brand-title">876KICKZ</h1>
+    <img src="../Assets/logo.png" alt="876Kickz logo" class="main-logo">
+    <p class="brand-slogan">NEVER SETTLE FOR LESS</p>
   </div>
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="login.html">Login</a>
-  </nav>
-</header>
 
-<main class="container narrow">
-  <h2>Create Account</h2>
+    <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation">☰</button>
 
-  <form id="register-form">
-    <label>Full Name</label>
-    <input>
+    <nav aria-label="Main navigation">
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#products">Products</a></li>
+        <li><a href="cart.html">Cart</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <label>Date of Birth</label>
-    <input type="date">
+  <main>
+    <!-- IA2: Registration form with validation -->
+    <section class="form-card">
+      <h2>Create an Account</h2>
+      <p>Register to save your favourite jerseys, checkout faster, and get special offers.</p>
 
-    <label>Email</label>
-    <input>
+      <div id="regError" class="error" aria-live="polite"></div>
 
-    <label>Username</label>
-    <input>
+      <form id="registerForm" novalidate>
+        <div class="form-row">
+          <label for="regName">Full Name</label>
+          <input type="text" id="regName" name="name" autocomplete="name">
+        </div>
 
-    <label>Password</label>
-    <input type="password">
+        <div class="form-row">
+          <label for="regDob">Date of Birth</label>
+          <input type="date" id="regDob" name="dob">
+        </div>
 
-    <button class="btn primary">Register</button>
-  </form>
-</main>
+        <div class="form-row">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" name="email" autocomplete="email">
+        </div>
 
-<script src="../script.js"></script>
+         <div class="form-row">
+          <label for="regPhone">Phone Number</label>
+          <input type="tel" id="regPhone" placeholder="876-555-1234" required>
+      </div>
+
+        <div class="form-row">
+          <label for="regUsername">Username</label>
+          <input type="text" id="regUsername" name="username" autocomplete="username">
+        </div>
+
+        <div class="form-row">
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword" name="password" autocomplete="new-password">
+        </div>
+
+        <div class="form-actions">
+          <button class="btn" type="submit">Register</button>
+          <a class="btn secondary" href="login.html">Back to Login</a>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2025 876Kickz • Never Settle for Less.</p>
+  </footer>
 </body>
 </html>

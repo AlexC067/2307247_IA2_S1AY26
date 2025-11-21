@@ -1,184 +1,196 @@
-/* ==========================================
-   SCRIPT.JS — 876Kickz
-   by Alex Crawford | 2307247
-   ========================================== */
+/* ===========================
+   CART SYSTEM (LocalStorage)
+   =========================== */
 
-/* PRODUCT LIST */
-const PRODUCTS = [
-  {
-    id: 1,
-    title: "Custom Football Jersey",
-    price: 40.50,
-    img: "../Assets/product1.png",
-    desc: "Premium football jersey featuring your name and the official 876Kickz logo."
-  },
-  {
-    id: 2,
-    title: "Track Suit + Shoes (unisex)",
-    price: 74.99,
-    img: "../Assets/product2.png",
-    desc: "Complete athletic tracksuit with matching footwear — built for performance."
-  },
-  {
-    id: 3,
-    title: "Female Gym Wear Set",
-    price: 45.99,
-    img: "../Assets/product3.png",
-    desc: "Leggings + sports bra + sneakers — fashionable & performance-ready."
-  }
-   {
-    id: 4,
-    title: "Female Gym Wear Set",
-    price: 25.99,
-    img: "../Assets/product4.png",
-    desc: "Leggings + sports bra + sneakers — fashionable & performance-ready."
-  }
-];
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-const TAX_RATE = 0.12;
-
-/* CART FUNCTIONS */
-function getCart() {
-  return JSON.parse(localStorage.getItem("cart") || "[]");
-}
-
-function saveCart(cart) {
+/* Save Cart */
+function saveCart() {
   localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartCount();
 }
 
-/* ADD TO CART */
-function addToCart(id, qty = 1) {
-  const cart = getCart();
-  const item = cart.find(x => x.id === id);
+/* Add to Cart */
+function handleAddToCartClick(event) {
+  const btn = event.currentTarget;
+  let id, name, price;
 
-  if (item) item.qty += qty;
-  else cart.push({ id, qty });
+  // ✅ Case 1: product card on index.html (home)
+  const card = btn.closest(".product-card");
+  if (card) {
+    id = card.dataset.productId;
+    const nameEl = card.querySelector(".product-name");
+    const priceEl = card.querySelector(".price");
 
-  saveCart(cart);
+    name = nameEl ? nameEl.textContent.trim() : "Item";
+    if (priceEl) {
+      if (priceEl.dataset.price) {
+        price = parseFloat(priceEl.dataset.price);
+      } else {
+        price = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, ""));
+      }
+    }
+  } else {
+    // ✅ Case 2: product.html detail page
+    const titleEl = document.querySelector(".pd-title");
+    const priceEl = document.querySelector(".pd-price");
+
+    id = "detail-p1"; // simple id for detail product
+    name = titleEl ? titleEl.textContent.trim() : "Item";
+    if (priceEl) {
+      price = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, ""));
+    }
+  }
+
+  if (!price || isNaN(price)) return;
+
+  const existing = cart.find(item => item.id === id);
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push({ id, name, price, qty: 1 });
+  }
+
+  saveCart();
+  alert(`${name} added to cart.`);
 }
 
-/* UPDATE CART COUNT */
-function updateCartCount() {
-  const el = document.getElementById("cart-count");
-  if (!el) return;
+/* Load Cart Table (cart.html) */
+function loadCartTable() {
+  const tbody = document.querySelector("#cartBody");
+  const subtotalEl = document.querySelector("#subtotal");
+  const taxEl = document.querySelector("#tax");
+  const discountEl = document.querySelector("#discount");
+  const totalEl = document.querySelector("#total");
 
-  const total = getCart().reduce((sum, p) => sum + p.qty, 0);
-  el.textContent = total;
-}
+  if (!tbody) return;
 
-/* LOAD PRODUCT LIST PAGE */
-function renderProducts() {
-  const container = document.getElementById("products");
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  PRODUCTS.forEach(p => {
-    container.innerHTML += `
-      <article class="product-card">
-        <img src="${p.img}" alt="${p.title}">
-        <h3>${p.title}</h3>
-        <p>${p.desc}</p>
-        <p class="price">$${p.price.toFixed(2)}</p>
-
-        <button class="btn primary" onclick="addToCart(${p.id})">Add to Cart</button>
-        <a class="btn" href="product.html?id=${p.id}">View Details</a>
-      </article>
-    `;
-  });
-}
-
-/* PRODUCT DETAIL PAGE */
-function renderProductDetail() {
-  const params = new URLSearchParams(location.search);
-  const id = Number(params.get("id"));
-  const p = PRODUCTS.find(x => x.id === id);
-  if (!p) return;
-
-  const main = document.querySelector("main.container");
-
-  main.innerHTML = `
-    <div class="product-detail-card">
-      <img src="${p.img}" class="product-detail-img" alt="${p.title}">
-      <h2>${p.title}</h2>
-      <p>${p.desc}</p>
-      <p class="price">$${p.price.toFixed(2)}</p>
-
-      <button class="btn primary" onclick="addToCart(${p.id})">Add to Cart</button>
-      <a href="product-list.html" class="btn">Back</a>
-    </div>
-  `;
-}
-
-/* CART PAGE */
-function renderCartPage() {
-  const container = document.getElementById("cart-contents");
-  const summary = document.getElementById("cart-summary");
-  if (!container || !summary) return;
-
-  const cart = getCart();
-  container.innerHTML = "";
+  tbody.innerHTML = "";
   let subtotal = 0;
 
-  cart.forEach(item => {
-    const p = PRODUCTS.find(x => x.id === item.id);
-    const line = p.price * item.qty;
-    subtotal += line;
+  cart.forEach((item, index) => {
+    const row = document.createElement("tr");
 
-    container.innerHTML += `
-      <div class="cart-line">
-        <span>${p.title} (${item.qty})</span>
-        <span>$${line.toFixed(2)}</span>
-      </div>
+    row.innerHTML = `
+      <td>${item.name}</td>
+      <td>$${item.price.toFixed(2)}</td>
+      <td>${item.qty}</td>
+      <td>$${(item.price * item.qty).toFixed(2)}</td>
     `;
+
+    subtotal += item.price * item.qty;
+    tbody.appendChild(row);
   });
 
-  const tax = subtotal * TAX_RATE;
-  const total = subtotal + tax;
+  let discount = subtotal > 100 ? subtotal * 0.10 : 0;
+  let tax = subtotal * 0.15;
+  let total = subtotal - discount + tax;
 
-  summary.innerHTML = `
-    <div class="cart-line"><b>Subtotal</b> <span>$${subtotal.toFixed(2)}</span></div>
-    <div class="cart-line"><b>Tax</b> <span>$${tax.toFixed(2)}</span></div>
-    <div class="cart-line"><b>Total</b> <span>$${total.toFixed(2)}</span></div>
-  `;
+  subtotalEl.textContent = "$" + subtotal.toFixed(2);
+  discountEl.textContent = "$" + discount.toFixed(2);
+  taxEl.textContent = "$" + tax.toFixed(2);
+  totalEl.textContent = "$" + total.toFixed(2);
+
+  localStorage.setItem("cartTotals", total);
 }
 
-/* CHECKOUT PAGE */
-function renderCheckoutSummary() {
-  const container = document.getElementById("checkout-cart-summary");
-  if (!container) return;
-
-  const cart = getCart();
-  let subtotal = 0;
-  let html = "";
-
-  cart.forEach(item => {
-    const p = PRODUCTS.find(x => x.id === item.id);
-    const line = p.price * item.qty;
-    subtotal += line;
-
-    html += `<p>${p.title} × ${item.qty} — $${line.toFixed(2)}</p>`;
-  });
-
-  const tax = subtotal * TAX_RATE;
-  const total = subtotal + tax;
-
-  html += `
-    <p><b>Subtotal:</b> $${subtotal.toFixed(2)}</p>
-    <p><b>Tax:</b> $${tax.toFixed(2)}</p>
-    <p><b>Total:</b> $${total.toFixed(2)}</p>
-  `;
-
-  container.innerHTML = html;
-  document.getElementById("amount").value = total.toFixed(2);
+/* Clear Cart */
+function clearCart() {
+  cart = [];
+  saveCart();
 }
 
-/* INIT */
+/* ===========================
+   LOGIN + REGISTER + CHECKOUT
+   =========================== */
+
+function validateLoginForm(event) {
+  event.preventDefault();
+
+  let user = document.getElementById("loginUsername").value.trim();
+  let pass = document.getElementById("loginPassword").value.trim();
+  let err = document.getElementById("loginError");
+
+  if (!user || !pass) {
+    err.textContent = "Please fill in all fields.";
+    return;
+  }
+
+  localStorage.setItem("currentUser", user);
+  window.location.href = "index.html";
+}
+
+function validateRegisterForm(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("regName").value.trim();
+  const dob = document.getElementById("regDob").value.trim();
+  const phone = document.getElementById("regPhone").value.trim();
+  const email = document.getElementById("regEmail").value.trim();
+  const username = document.getElementById("regUsername").value.trim();
+  const password = document.getElementById("regPassword").value.trim();
+  const err = document.getElementById("regError");
+
+  const errors = [];
+
+  if (!name) errors.push("Full name is required.");
+  if (!dob) errors.push("Date of birth is required.");
+
+  //  PHONE VALIDATION FORMAT
+  const phoneRegex = /^[0-9]{3}[-]?[0-9]{3}[-]?[0-9]{4}$/;
+  if (!phoneRegex.test(phone)) {
+    errors.push("Phone number must be valid (e.g. 876-555-1234).");
+  }
+
+  if (!email.includes("@")) errors.push("A valid email is required.");
+  if (!username) errors.push("Username is required.");
+  if (password.length < 6) errors.push("Password must be at least 6 characters long.");
+
+  if (errors.length > 0) {
+    err.textContent = errors.join(" ");
+    return;
+  }
+
+  err.textContent = "";
+
+  // Save the user to localStorage
+  const user = {
+    name,
+    dob,
+    phone,
+    email,
+    username
+  };
+
+  localStorage.setItem("registeredUser", JSON.stringify(user));
+
+  alert("Registration successful!");
+  window.location.href = "login.html";
+}
+
+
+function handleCheckoutSubmit(event) {
+  event.preventDefault();
+
+  let amount = parseFloat(document.getElementById("amountPaid").value);
+  let err = document.getElementById("checkoutError");
+
+  let total = parseFloat(localStorage.getItem("cartTotals"));
+
+  if (!amount || amount < total) {
+    err.textContent = "Amount must be at least the total.";
+    return;
+  }
+
+  alert("Order confirmed! Thank you for shopping.");
+  clearCart();
+  window.location.href = "index.html";
+}
+
+/* AUTO INITIALIZATION */
 document.addEventListener("DOMContentLoaded", () => {
-  updateCartCount();
-  renderProducts();
-  renderProductDetail();
-  renderCartPage();
-  renderCheckoutSummary();
+  document.querySelectorAll(".add-to-cart").forEach(btn =>
+    btn.addEventListener("click", handleAddToCartClick)
+  );
+
+  loadCartTable();
 });
