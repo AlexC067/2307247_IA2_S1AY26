@@ -4,59 +4,68 @@
   <meta charset="UTF-8">
   <title>Login | 876Kickz</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../style.css">
-  <script src="../script.js" defer></script>
+
+  <!-- Correct GitHub Pages paths -->
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
+
 <body data-page="login">
-  <header class="site-header centered-header">
+
+<header class="site-header centered-header">
   <div class="header-brand">
     <h1 class="brand-title">876KICKZ</h1>
-    <img src="../Assets/logo.png" alt="876Kickz logo" class="main-logo">
+    <img src="Assets/logo.png" alt="876Kickz logo" class="main-logo">
     <p class="brand-slogan">NEVER SETTLE FOR LESS</p>
   </div>
 
-    <button id="navToggle" class="nav-toggle" aria-label="Toggle navigation">☰</button>
+  <button id="navToggle" class="nav-toggle">☰</button>
 
-    <nav aria-label="Main navigation">
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="index.html#products">Products</a></li>
-        <li><a href="cart.html">Cart</a></li>
-        <li><a href="login.html">Login</a></li>
-        <li><a href="about.html">About</a></li>
-      </ul>
-    </nav>
-  </header>
+  <nav>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#products">Products</a></li>
+      <li><a href="cart.html">Cart</a></li>
+      <li><a href="login.html">Login</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </nav>
+</header>
 
-  <main>
-    <!-- IA2: Login form with JS validation -->
-    <section class="form-card">
-      <h2>Login</h2>
-      <p>Sign in to view your past orders and track your 876Kickz cart.</p>
+<main>
 
-      <div id="loginError" class="error" aria-live="polite"></div>
+  <section class="form-card">
+    <h2>Login</h2>
+    <p>Sign in to access your cart and account.</p>
 
-      <form id="loginForm" novalidate>
-        <div class="form-row">
-          <label for="loginUsername">Username</label>
-          <input type="text" id="loginUsername" name="username" autocomplete="username">
-        </div>
+    <p id="loginError" class="error" aria-live="polite"></p>
 
-        <div class="form-row">
-          <label for="loginPassword">Password</label>
-          <input type="password" id="loginPassword" name="password" autocomplete="current-password">
-        </div>
+    <!-- FIXED: added working onsubmit -->
+    <form id="loginForm" onsubmit="validateLoginForm(event)" novalidate>
 
-        <div class="form-actions">
-          <button class="btn" type="submit">Login</button>
-          <a class="btn secondary" href="register.html">Create Account</a>
-        </div>
-      </form>
-    </section>
-  </main>
+      <div class="form-row">
+        <label for="loginUsername">Username</label>
+        <input type="text" id="loginUsername" autocomplete="username">
+      </div>
 
-  <footer class="site-footer">
-    <p>&copy; 2025 876Kickz • Never Settle for Less.</p>
-  </footer>
+      <div class="form-row">
+        <label for="loginPassword">Password</label>
+        <input type="password" id="loginPassword" autocomplete="current-password">
+      </div>
+
+      <div class="form-actions">
+        <button class="btn" type="submit">Login</button>
+        <a class="btn secondary" href="register.html">Create Account</a>
+      </div>
+
+    </form>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <p>&copy; 2025 876Kickz • Never Settle for Less.</p>
+</footer>
+
 </body>
 </html>
